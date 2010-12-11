@@ -4,84 +4,83 @@
  * @author D Lawson <webmaster@altovista.nl>
  */
 
-canvaslib.DisplayContainer = function(canvasId) {
-  this.id = '';
-  this.rotation = 0;
-  this.x = 0;
-  this.y = 0;
-  this.alpha = 1;
-  this.enabled = true;
-  this.width = 0;
-  this.height = 0;
-  this.scaleX = 1;
-  this.scaleY = 1;
-  this.children = [];
-  this.visible = true;
-  this.mouseEnabled = true;
-  this.useHandCursor = false;
-  this.shadow = false;
-  this.shadowBlur = 0;
-  this.shadowColor = 0;
-  this.shadowOffsetX = 0;
-  this.shadowOffsetY = 0;
-  this.onMouseOver = null;
-  this.onMouseOut = null;
-  this.onMouseDown = null;
-  this.onMouseMove = null;
-  this.localX = 0;
-  this.localY = 0;
+function DisplayContainer(canvasId) {
+    this.id = '';
+    this.rotation = 0;
+    this.x = 0;
+    this.y = 0;
+    this.alpha = 1;
+    this.enabled = true;
+    this.width = 0;
+    this.height = 0;
+    this.scaleX = 1;
+    this.scaleY = 1;
+    this.children = [];
+    this.visible = true;
+    this.mouseEnabled = true;
+    this.useHandCursor = false;
+    this.shadow = false;
+    this.shadowBlur = 0;
+    this.shadowColor = 0;
+    this.shadowOffsetX = 0;
+    this.shadowOffsetY = 0;
+    this.onMouseOver = null;
+    this.onMouseOut = null;
+    this.onMouseDown = null;
+    this.onMouseMove = null;
+    this.localX = 0;
+    this.localY = 0;
 
-  this._oldX = 0;
-  this._oldY = 0;
-  this._oldRotation = 0;
-  this._oldScaleX = 1;
-  this._oldScaleY = 1;
-  this._oldVisible = true;
+    this._oldX = 0;
+    this._oldY = 0;
+    this._oldRotation = 0;
+    this._oldScaleX = 1;
+    this._oldScaleY = 1;
+    this._oldVisible = true;
 
-  this._mouseX = 0;
-  this._mouseY = 0;
-  this._oldMouseX = 0;
-  this._oldMouseY = 0;
-  this._canvasX = 0;
-  this._canvasY = 0;
-  this._visible = true;
-  this._rotation = 0;
-  this._scaleX = 1;
-  this._scaleY = 1;
-  this._canvas = null;
-  this._underCursor = false;
-  this._lastObjectUnderCursor = null;
-  this._backBufferCanvas = null;
-  this._backBufferContext;
-  this._context = null;
-  this._parentDisplayContainer = null;
-  this._superDisplayContainer = null;
-  this._childrenChanged = false;
-  this._allChildren = null;
+    this._mouseX = 0;
+    this._mouseY = 0;
+    this._oldMouseX = 0;
+    this._oldMouseY = 0;
+    this._canvasX = 0;
+    this._canvasY = 0;
+    this._visible = true;
+    this._rotation = 0;
+    this._scaleX = 1;
+    this._scaleY = 1;
+    this._canvas = null;
+    this._underCursor = false;
+    this._lastObjectUnderCursor = null;
+    this._backBufferCanvas = null;
+    this._backBufferContext = null;
+    this._context = null;
+    this._parentDisplayContainer = null;
+    this._superDisplayContainer = null;
+    this._childrenChanged = false;
+    this._allChildren = null;
 
-  if(canvasId) {
-    this._canvas = document.getElementById(canvasId);
-    this._context = this._canvas.getContext('2d');
+    if(canvasId) {
+        this._canvas = document.getElementById(canvasId);
+        this._context = this._canvas.getContext('2d');
 
-    this._backBufferCanvas = document.createElement('canvas');
-    this._backBufferCanvas.width = this._canvas.width;
-    this._backBufferCanvas.height = this._canvas.height;
-    this._backBufferContext = this._backBufferCanvas.getContext('2d');
-  }
-};
+        this._backBufferCanvas = document.createElement('canvas');
+        this._backBufferCanvas.width = this._canvas.width;
+        this._backBufferCanvas.height = this._canvas.height;
+        this._backBufferContext = this._backBufferCanvas.getContext('2d');
+    }
+}
 
-canvaslib.DisplayContainer.prototype = {
   /**
    * Returns the parent displaycontainer
    */
-  parentDisplayContainer: function() {
+DisplayContainer.prototype.parentDisplayContainer = function() {
     return this._parentDisplayContainer;
-  },
+};
 
   /**
    * Find super parent object
    */
-  superDisplayContainer: function() {
+DisplayContainer.prototype.superDisplayContainer = function() {
     // cache search of super display container
     if(this._parentDisplayContainer) {
       if(!this._superDisplayContainer)
@@ -93,19 +92,19 @@ canvaslib.DisplayContainer.prototype = {
       return this;
 
     }
-  },
+};
 
   /**
    * Tests if this object is the super
    */
-  isSuperDisplayContainer: function() {
+DisplayContainer.prototype.isSuperDisplayContainer = function() {
     return (this.superDisplayContainer() == this);
-  },
+  };
 
   /**
    * Adds a given child to the displaylist of the object container
    */
-  addChild: function(child) {
+DisplayContainer.prototype.addChild = function(child) {
     this.superDisplayContainer()._childrenChanged = true;
 
     // is the object already a child of another display container? then remove it
@@ -123,12 +122,12 @@ canvaslib.DisplayContainer.prototype = {
     this.children.push(child);
 
     return this;
-  },
+  };
 
   /**
    * Sets Z-index of given child
    */
-  setChildIndex: function(child, index) {
+DisplayContainer.prototype.setChildIndex = function(child, index) {
 
     if(this.children.indexOf(child) == -1) {
       throw "Child object not found in displaylist";
@@ -137,12 +136,12 @@ canvaslib.DisplayContainer.prototype = {
       // @TODO implement me please!
       this.superDisplayContainer()._childrenChanged = true;
     }
-  },
+  };
 
   /**
    * Removes the given child form the displaylist
    */
-  removeChild: function(child) {
+DisplayContainer.prototype.removeChild = function(child) {
     var i;
 
     i = this.children.indexOf(child); // [0, 1, 2, 3, 4, 5, 6, 7]
@@ -164,12 +163,12 @@ canvaslib.DisplayContainer.prototype = {
 
       return this;
     }
-  },
+  };
 
   /**
    * Draws everyone
    */
-  draw: function(clear) {
+DisplayContainer.prototype.draw = function(clear) {
     if(this.isSuperDisplayContainer()) {
       this._drawAllChildren(clear);
       this._handleMouseEventsAllChildren();
@@ -178,48 +177,50 @@ canvaslib.DisplayContainer.prototype = {
       this.superDisplayContainer().draw(clear);
 
     }
-  },
+  };
 
   /**
    * Tests if the object's position has been changed
    */
-  positionChanged: function() {
+DisplayContainer.prototype.positionChanged = function() {
     return (  this.x != this._oldX || this.y != this._oldY ||
               this.rotation != this._oldRotation ||
               this.scaleX != this._oldScaleX || this.scaleY != this._oldScaleY ||
               this.visible != this._oldVisible );
-  },
+  };
 
   /**
    * Translates relative X, Y pos to canvas/world X, Y pos
    */
-  _getInheritedTranslatedVars: function() {
+DisplayContainer.prototype._getInheritedTranslatedVars = function() {
     var translatedX = 0;
     var translatedY = 0;
     var translatedRotation = 0;
-    var translatedScaleX = 0;
-    var translatedScaleY = 0;
+    var translatedScaleX = 1;
+    var translatedScaleY = 1;
     var theParent = this;
     var visible = true;
 
     while(theParent != null) {
+      translatedRotation += theParent.rotation;
+      translatedScaleX *= theParent.scaleX;
+      translatedScaleY *= theParent.scaleY;
+      // actually, if parental scale is not 1, you can't calculate translatedX just by adding theParent.x
+      //TODO: Implement proper coordinates translation when scaled
       translatedX += theParent.x;
       translatedY += theParent.y;
-      translatedRotation += theParent.rotation;
-      translatedScaleX += theParent.scaleX;
-      translatedScaleY += theParent.scaleY;
       if(!theParent.visible) visible = false;
 
       theParent = theParent._parentDisplayContainer;
     }
 
     return [translatedX, translatedY, translatedRotation, translatedScaleX, translatedScaleY, visible];
-  },
+  };
 
   /**
    * Translated relative X, Y pos to canvas/world X, Y pos
    */
-  _setCanvasPosition: function() {
+DisplayContainer.prototype._setCanvasPosition = function() {
     var newVars;
 
     if(this.positionChanged()) {
@@ -238,15 +239,13 @@ canvaslib.DisplayContainer.prototype = {
       this._scaleY = newVars[4];
       this._visible = newVars[5];
     }
-  },
+  };
 
   /**
    * Draws all objects
    */
-  _drawAllChildren: function(clear) {
-    var i = 0;
-    var children;
-    var newCanvasPos;
+  DisplayContainer.prototype._drawAllChildren = function(clear) {
+    var i;
 
     if(this.isSuperDisplayContainer()) {
       if(clear) this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
@@ -279,12 +278,12 @@ canvaslib.DisplayContainer.prototype = {
       this.superDisplayContainer()._drawAllChildren(clear);
 
     }
-  },
+  };
 
   /**
    * Fires all appropiate mouse events for every display obj
    */
-  _handleMouseEventsAllChildren: function() {
+  DisplayContainer.prototype._handleMouseEventsAllChildren = function() {
     var i = 0;
     var objectUnderCursor = null;
     var obj = null;
@@ -353,37 +352,33 @@ canvaslib.DisplayContainer.prototype = {
       this.superDisplayContainer()._handleMouseEventsAllChildren();
 
     }
-  },
+  };
 
-  _setHandCursor: function(showHand) {
+  DisplayContainer.prototype._setHandCursor = function(showHand) {
     if(showHand) {
       this._canvas.style.cursor = 'pointer';
     } else {
       this._canvas.style.cursor = '';
     }
-  },
+  };
 
   /**
    * Retrieves all children in the tree
    */
-  _getAllChildren: function(onlyVisibles) {
-    var i = 0;
+  DisplayContainer.prototype._getAllChildren = function(onlyVisibles) {
     var children = [];
-
     if(this.isSuperDisplayContainer()) {
       this._getChildren(this, children, onlyVisibles);
       return children;
-
     } else {
       return this.superDisplayContainer()._getAllChildren();
-
     }
-  },
+  };
 
   /**
    * Retrieves ALL children from given parent and it's sub-children
    */
-  _getChildren: function(fromParent, collectedChildren, onlyVisibles) {
+  DisplayContainer.prototype._getChildren = function(fromParent, collectedChildren, onlyVisibles) {
     var i = 0;
 
     for(i = 0; i < fromParent.children.length; i++) {
@@ -393,14 +388,14 @@ canvaslib.DisplayContainer.prototype = {
       if((!onlyVisibles || (onlyVisibles && fromParent.children[i].visible)) && fromParent.children[i].children && fromParent.children[i].children.length > 0)
         this._getChildren(fromParent.children[i], collectedChildren, onlyVisibles);
     }
-  },
+  };
 
-  _draw: function(context, drawHitarea) {
+  DisplayContainer.prototype._draw = function(context, drawHitarea) {
     // you could implement this...
-  },
+  };
 
   // privates
-  _findSuperDisplayContainer: function(parent) {
+  DisplayContainer.prototype._findSuperDisplayContainer = function(parent) {
     if(parent._parentDisplayContainer) {
       return this._findSuperDisplayContainer(parent._parentDisplayContainer);
 
@@ -408,34 +403,32 @@ canvaslib.DisplayContainer.prototype = {
       return parent;
 
     }
-  },
+  };
 
   /**
    * Set's up global mouse event listener
    */
-  _setupMouse: function() {
+  DisplayContainer.prototype._setupMouse = function() {
       var self = this;
 
       this._canvas.mouseover = true;
       this._canvas.addEventListener('mousemove', function(event) {
-        var super = self.superDisplayContainer();
+        var _super = self.superDisplayContainer();
 
-        super._oldMouseX = super._oldMouseX;
-        super._oldMouseX = super._oldMouseY;
-        super._mouseX = event.clientX - self._canvas.offsetLeft;
-        super._mouseY = event.clientY - self._canvas.offsetTop;
-        super.localX = super._mouseX;
-        super.localY = super._mouseY;
+        _super._mouseX = event.clientX - self._canvas.offsetLeft;
+        _super._mouseY = event.clientY - self._canvas.offsetTop;
+        _super.localX = supr._mouseX;
+        _super.localY = supr._mouseY;
 
-        if(super.onMouseMove) super.onMouseMove();
+        if(_super.onMouseMove) _super.onMouseMove();
 
       }, false);
-  },
+  };
 
   /**
    * Sets up context for drawing
    */
-  _setupContext: function(context, displayObj) {
+  DisplayContainer.prototype._setupContext = function(context, displayObj) {
     // sets mouse over events if not present yet
     if(!this._canvas.mouseover)
       this._setupMouse();
@@ -453,5 +446,6 @@ canvaslib.DisplayContainer.prototype = {
       context.shadowOffsetX = displayObj.shadowOffsetX;
       context.shadowOffsetY = displayObj.shadowOffsetY;
     }
-  }
-};
+  };
+
+canvaslib.DisplayContainer = DisplayContainer;
