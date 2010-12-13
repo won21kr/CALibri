@@ -241,44 +241,44 @@ DisplayContainer.prototype._setCanvasPosition = function() {
     }
   };
 
-  /**
-   * Draws all objects
-   */
-  DisplayContainer.prototype._drawAllChildren = function(clear) {
+/**
+ * Draws all objects
+ */
+DisplayContainer.prototype._drawAllChildren = function(clear) {
     var i;
 
-    if(this.isSuperDisplayContainer()) {
-      if(clear) this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
+    if (this.isSuperDisplayContainer()) {
+        if (clear)
+            this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
 
-      // retrieve ALL children
-      if(this._childrenChanged) {
-        this._allChildren = this._getAllChildren();
-        this._childrenChanged = false;
-      }
-
-      // loop all children
-      for(i = 0; i < this._allChildren.length; i++) {
-        // translate X, Y pos
-        this._allChildren[i]._setCanvasPosition();
-        if(this._allChildren[i]._visible) {
-          // draw on surface
-          // setup context
-          this._context.save();
-          this._setupContext(this._context, this._allChildren[i]);
-
-          // go draw!
-          this._allChildren[i]._draw(this._context);
-
-          // restore it
-          this._context.restore();
+        // retrieve ALL children
+        if (this._childrenChanged) {
+            this._allChildren = this._getAllChildren();
+            this._childrenChanged = false;
         }
-      }
 
+        // loop all children
+        for (i = 0; i < this._allChildren.length; i++) {
+            // translate X, Y pos
+            this._allChildren[i]._setCanvasPosition();
+            if (this._allChildren[i]._visible) {
+                // draw on surface
+                // save context
+                this._context.save();
+                // setup context
+                this._setupContext(this._context, this._allChildren[i]);
+
+                // go draw!
+                this._allChildren[i]._draw(this._context);
+
+                // restore context
+                this._context.restore();
+            }
+        }
     } else {
-      this.superDisplayContainer()._drawAllChildren(clear);
-
+        this.superDisplayContainer()._drawAllChildren(clear);
     }
-  };
+};
 
   /**
    * Fires all appropiate mouse events for every display obj
@@ -435,7 +435,13 @@ DisplayContainer.prototype._setCanvasPosition = function() {
 
     // sets the alpha of the image
     context.globalAlpha = displayObj.alpha;
-    context.translate(displayObj._canvasX, displayObj._canvasY);
+    var x = displayObj._canvasX;
+    var y = displayObj._canvasY;
+    if (displayObj.registrationPoint) {
+        x -= displayObj.registrationPoint.x;
+        y -= displayObj.registrationPoint.y;
+    }
+    context.translate(x, y);
     context.rotate(canvaslib.Math.angleToRadians(displayObj._rotation));
     context.scale(displayObj._scaleX, displayObj._scaleY);
 

@@ -15,6 +15,7 @@ canvaslib.Shape = function() {
    this._fill = false;
    this._alpha = 1;
    this._drawingCommands = [];
+   this.registrationPoint = {x: 0, y: 0};
 };
 
 canvaslib.Shape.prototype = {
@@ -230,7 +231,7 @@ canvaslib.Shape.prototype = {
     var j = 0;
     var params = [];
     var param;
-
+    // TODO: Add registration point offset
     // @TODO, @FIXME maybe an "eval" is quicker than executing seperate
     // methods?
     for(i = 0; i < this._drawingCommands.length; i++) {
@@ -255,6 +256,14 @@ canvaslib.Shape.prototype = {
 
     this._madeChanges = false;
   }
+};
+
+
+/**
+ * Sets registration point
+ */
+canvaslib.Shape.prototype.setRegistrationPoint = function(x, y) {
+    this.registrationPoint = {x: x, y: y};
 };
 
 canvaslib.Utils.addOwnProperties(canvaslib.DisplayContainer.prototype, canvaslib.Shape.prototype);
