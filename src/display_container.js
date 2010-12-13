@@ -68,7 +68,7 @@ canvaslib.DisplayContainer = function(canvasId) {
         this._backBufferCanvas.height = this._canvas.height;
         this._backBufferContext = this._backBufferCanvas.getContext('2d');
     }
-}
+};
 
 canvaslib.DisplayContainer.prototype = {
     /**
