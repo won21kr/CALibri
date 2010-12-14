@@ -125,6 +125,9 @@ canvaslib.TweenCommand.prototype.update = function(updateTime) {
     for(property in this.toParams) {
         this.obj[property] = this.startValues[property] + (factor * this.toParams[property]);
     }
+
+    if (this.finished && this.onComplete)
+      this.onComplete.call();
 };
 
 // easing
