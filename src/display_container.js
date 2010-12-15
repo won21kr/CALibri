@@ -420,8 +420,8 @@ calibri.DisplayContainer.prototype = {
 
             _super._mouseX = event.clientX - self._canvas.offsetLeft;
             _super._mouseY = event.clientY - self._canvas.offsetTop;
-            _super.localX = supr._mouseX;
-            _super.localY = supr._mouseY;
+            _super.localX = _super._mouseX;
+            _super.localY = _super._mouseY;
 
             if(_super.onMouseMove)
                 _super.onMouseMove();
