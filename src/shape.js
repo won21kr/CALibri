@@ -1,10 +1,25 @@
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
+ *
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
+ *
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
+ */
+
 /**
  * Shape
  *
  * @author D Lawson <webmaster@altovista.nl>
  */
-canvaslib.Shape = function() {
-   canvaslib.DisplayContainer.call(this);
+calibri.Shape = function() {
+   calibri.DisplayContainer.call(this);
 
    this.bitmapCache = false;
    this._imageData = null;
@@ -18,7 +33,7 @@ canvaslib.Shape = function() {
    this.registrationPoint = {x: 0, y: 0};
 };
 
-canvaslib.Shape.prototype = {
+calibri.Shape.prototype = {
   /**
    * Clears all drawing commands
    */
@@ -262,8 +277,8 @@ canvaslib.Shape.prototype = {
 /**
  * Sets registration point
  */
-canvaslib.Shape.prototype.setRegistrationPoint = function(x, y) {
+calibri.Shape.prototype.setRegistrationPoint = function(x, y) {
     this.registrationPoint = {x: x, y: y};
 };
 
-canvaslib.Utils.addOwnProperties(canvaslib.DisplayContainer.prototype, canvaslib.Shape.prototype);
+calibri.Utils.addOwnProperties(calibri.DisplayContainer.prototype, calibri.Shape.prototype);

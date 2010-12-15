@@ -1,11 +1,34 @@
-/**
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
  *
- * Bitmap
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
  *
- * @author D Lawson <webmaster@altovista.nl>
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
  */
-canvaslib.Bitmap = function(imageObj) {
-  canvaslib.DisplayContainer.call(this);
+
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
+ *
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
+ *
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
+ */
+calibri.Bitmap = function(imageObj) {
+  calibri.DisplayContainer.call(this);
 
   this.imageData = imageObj ? imageObj : null;
   this.registrationPoint = {x: 0, y:0};
@@ -14,7 +37,7 @@ canvaslib.Bitmap = function(imageObj) {
 /**
  * Draws the image to the canvas
  */
-canvaslib.Bitmap.prototype._draw = function(context, drawHitarea) {
+calibri.Bitmap.prototype._draw = function(context, drawHitarea) {
     if(this.imageData) {
       // draw hit area
       if(drawHitarea) {
@@ -28,16 +51,16 @@ canvaslib.Bitmap.prototype._draw = function(context, drawHitarea) {
 /**
  * Sets registration point
  */
-canvaslib.Bitmap.prototype.setRegistrationPoint = function(x, y) {
+calibri.Bitmap.prototype.setRegistrationPoint = function(x, y) {
     this.registrationPoint = {x: Math.round(x), y: Math.round(y)};
 };
 
 /**
  * Sets registration point
  */
-canvaslib.Bitmap.prototype.centerRegistrationPoint = function() {
+calibri.Bitmap.prototype.centerRegistrationPoint = function() {
     this.setRegistrationPoint(this.imageData.width / 2, this.imageData.height / 2);
 };
 
 // inherit from display container
-canvaslib.Utils.addOwnProperties(canvaslib.DisplayContainer.prototype, canvaslib.Bitmap.prototype);
+calibri.Utils.addOwnProperties(calibri.DisplayContainer.prototype, calibri.Bitmap.prototype);

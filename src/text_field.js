@@ -1,10 +1,25 @@
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
+ *
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
+ *
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
+ */
+
 /**
  * Textfield
  *
  * @author D Lawson <webmaster@altovista.nl>
  */
-canvaslib.TextField = function() {
-  canvaslib.DisplayContainer.call(this);
+calibri.TextField = function() {
+  calibri.DisplayContainer.call(this);
   this.text = '';
   this.textAlign = 'left';
   this.strokeStyle = '';
@@ -13,7 +28,7 @@ canvaslib.TextField = function() {
   this.maxWidth = null;
 };
 
-canvaslib.TextField.prototype = {
+calibri.TextField.prototype = {
   _draw: function(context, drawHitarea) {
     context.font = this.font;
 
@@ -27,4 +42,4 @@ canvaslib.TextField.prototype = {
   }
 };
 
-canvaslib.Utils.addOwnProperties(canvaslib.DisplayContainer.prototype, canvaslib.TextField.prototype);
+calibri.Utils.addOwnProperties(calibri.DisplayContainer.prototype, calibri.TextField.prototype);

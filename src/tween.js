@@ -1,10 +1,25 @@
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
+ *
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
+ *
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
+ */
+
 /**
  * Tweening library inspired by TweenLite.
  * Credits to Robert Penner for the easing equations! http://www.robertpenner.com
  *
  * @author D Lawson <webmaster@altovista.nl>
  */
-canvaslib.Tween = {
+calibri.Tween = {
     _tweens: [],
     _initTime: new Date().getTime(),
 
@@ -13,7 +28,7 @@ canvaslib.Tween = {
      */
     to: function(obj, duration, toParams, options) {
         // create new tween
-        var tween = new canvaslib.TweenCommand(obj, toParams);
+        var tween = new calibri.TweenCommand(obj, toParams);
 
         // set all options
         tween.duration = duration;
@@ -21,7 +36,7 @@ canvaslib.Tween = {
         if(options) {
             tween.onComplete = options.onComplete ? options.onComplete : null;
             tween.delay = options.delay ? options.delay : 0;
-            tween.ease = options.ease ? options.ease : canvaslib.EaseDefault;
+            tween.ease = options.ease ? options.ease : calibri.EaseDefault;
         }
 
         tween.finished = false;
@@ -84,7 +99,7 @@ canvaslib.Tween = {
 
 
 // an individual animation
-canvaslib.TweenCommand = function(obj, params) {
+calibri.TweenCommand = function(obj, params) {
     var property;
 
     this.obj = obj;
@@ -92,7 +107,7 @@ canvaslib.TweenCommand = function(obj, params) {
     this.duration = 0;
     this.toParams = params;
     this.delay = 0;
-    this.ease = canvaslib.EaseDefault;
+    this.ease = calibri.EaseDefault;
     this.finished = false;
     this.onComplete = null;
     this.startValues = {};
@@ -108,7 +123,7 @@ canvaslib.TweenCommand = function(obj, params) {
     }
 };
 
-canvaslib.TweenCommand.prototype.update = function(updateTime) {
+calibri.TweenCommand.prototype.update = function(updateTime) {
     var time = updateTime - this.startTime;
     var factor;
     var property;
@@ -131,11 +146,11 @@ canvaslib.TweenCommand.prototype.update = function(updateTime) {
 };
 
 // easing
-canvaslib.EaseDefault = function(t, b, c, d) {
+calibri.EaseDefault = function(t, b, c, d) {
   return -c * (t /= d) * (t - 2) + b;
 };
 
-canvaslib.ElasticIn = function(t, b, c, d, a, p) {
+calibri.ElasticIn = function(t, b, c, d, a, p) {
   if(t == 0)
     return b;
 
@@ -155,7 +170,7 @@ canvaslib.ElasticIn = function(t, b, c, d, a, p) {
   return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
 };
 
-canvaslib.ElasticOut = function(t, b, c, d, a, p) {
+calibri.ElasticOut = function(t, b, c, d, a, p) {
   if(t == 0)
     return b;
 
@@ -175,7 +190,7 @@ canvaslib.ElasticOut = function(t, b, c, d, a, p) {
   return (a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b);
 };
 
-canvaslib.ElasticInOut = function(t, b, c, d, a, p) {
+calibri.ElasticInOut = function(t, b, c, d, a, p) {
   if(t == 0)
     return b;
 

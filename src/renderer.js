@@ -1,3 +1,18 @@
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
+ *
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
+ *
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
+ */
+
 /**
  * Renderer
  *
@@ -50,7 +65,7 @@ Renderer.prototype.handleInterval = function(self) {
         for(i = 0; i < self._frameHandlers.length; i++) self._frameHandlers[i]();
     
     // update tweening objects
-    canvaslib.Tween.update();
+    calibri.Tween.update();
     
     // draw everything to canvas
     self._mainContainer.draw(true);
@@ -65,4 +80,4 @@ Renderer.prototype.stop = function() {
     this._timer = null;
 };
 
-canvaslib.Renderer = Renderer;
+calibri.Renderer = Renderer;

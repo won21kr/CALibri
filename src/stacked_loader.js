@@ -1,9 +1,24 @@
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
+ *
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
+ *
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
+ */
+
 /**
  * Asset loader 
  *
  * @author D Lawson <webmaster@altovista.nl>
  */
-canvaslib.StackedLoader = {
+calibri.StackedLoader = {
   _onCompleteHandlers: [],
   _loadStack: [],
   _toLoad: null,
@@ -48,7 +63,7 @@ canvaslib.StackedLoader = {
       image = this._stack[this._toLoad.id];
       image.onload = null;
 
-      this._stack[this._toLoad.id] = new canvaslib.Bitmap(image);
+      this._stack[this._toLoad.id] = new calibri.Bitmap(image);
 
       image = null;
     }
@@ -86,7 +101,7 @@ canvaslib.StackedLoader = {
       switch(this._toLoad.type) {
         case 'image':
           this._stack[this._toLoad.id] = new Image();
-          this._stack[this._toLoad.id].onload = canvaslib.Utils.bind(this, this._handleAssetLoadComplete);
+          this._stack[this._toLoad.id].onload = calibri.Utils.bind(this, this._handleAssetLoadComplete);
           this._stack[this._toLoad.id].src = this._toLoad.url;
           break;
 

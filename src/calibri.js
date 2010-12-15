@@ -14,12 +14,10 @@
  */
 
 /**
- * Math functions
+ * HTML Canvas Library 
  *
  * @author D Lawson <webmaster@altovista.nl>
  */
-calibri.Math = {
-  angleToRadians: function(angle) {
-    return angle * Math.PI / 180
-  }
+var calibri = {
+  version: 0.1
 };

@@ -1,10 +1,25 @@
+/*
+ * CALibri - Canvas Animation Library
+ * Released under BSD License.
+ *
+ * (c) 2010 Dimitri Fedorov <df@antistatic.net>
+ * https://github.com/ai212983/CALibri
+ *
+ * Original code
+ * (c) 2010 Diederick Lawson <webmaster@altovista.nl>
+ * https://github.com/dkln/canvas_library
+ *
+ * @author DLawson
+ * @author df
+ */
+
 /**
  * Main display container
  *
  * @author D Lawson <webmaster@altovista.nl>
  */
 
-canvaslib.DisplayContainer = function(canvasId) {
+calibri.DisplayContainer = function(canvasId) {
     this.id = '';
     this.rotation = 0;
     this.x = 0;
@@ -70,7 +85,7 @@ canvaslib.DisplayContainer = function(canvasId) {
     }
 };
 
-canvaslib.DisplayContainer.prototype = {
+calibri.DisplayContainer.prototype = {
     /**
      * Returns the parent displaycontainer
      */
@@ -430,7 +445,7 @@ canvaslib.DisplayContainer.prototype = {
             y -= displayObj.registrationPoint.y;
         }
         context.translate(x, y);
-        context.rotate(canvaslib.Math.angleToRadians(displayObj._rotation));
+        context.rotate(calibri.Math.angleToRadians(displayObj._rotation));
         context.scale(displayObj._scaleX, displayObj._scaleY);
 
         // add shadow?
